@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: black;
+  color: white;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  max-width: 600px;
+  padding: 2rem;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+#birthday {
+  background-image: url('assets\images\IMG_6703.JPG');
+}
+
+#letter {
+  background-image: url('assets\images\IMG_6704.JPG');
+}
+
+#proposal {
+  background-image: url('assets\images\IMG_6705.JPG');
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #ff4081;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}

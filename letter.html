@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A Letter From My Heart</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #f9f3f3;
+      color: #333;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('https://transparenttextures.com/patterns/cream-paper.png');
+    }
+    
+    .page {
+      max-width: 600px;
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      margin: 2rem;
+      border: 1px solid #f0d6d6;
+    }
+    
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      color: #ff6b6b;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+    }
+    
+    #typedText {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      white-space: pre-line;
+      min-height: 400px;
+      opacity: 0;
+      animation: fadeIn 0.5s 1s forwards;
+    }
+    
+    .next-button {
+      background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+      display: block;
+      margin: 2rem auto 0;
+      opacity: 0;
+      animation: fadeIn 1s 13s forwards;
+      text-decoration: none;
+      text-align: center;
+      width: fit-content;
+    }
+    
+    .next-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      color: rgba(255, 107, 107, 0.6);
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body id="letter">
+  <div class="floating-hearts" id="heartsContainer"></div>
+  
+  <section class="page">
+    <h1>A Letter From My Heart</h1>
+    <div id="typedText"></div>
+    
+    <!-- Updated Button Link to Proposal Page -->
+    <a href="proposal.html" class="next-button" id="proposalButton">
+      Read My Proposal 💍
+    </a>
+  </section>
+
+  <script>
+    const letterText = `Hey [Her Name],
+
+I still remember the first time I saw you at the gym. You were sitting on that chest press bench, wearing that white top and pants, looking so calm and beautiful. Honestly, my first thought was "Aukath kahh bharr hyy" (I know, silly me!). Then I started thinking, "She's probably some typical Northii girl, maybe even a bit bossy." 😂😂 But man, I was way off.
+
+As I got to know you, all those ideas just disappeared. You're actually this amazing, joyful person who lights up everything around her. When you're near, I forget about everything else—the past, the worries, all of it. You just make things feel right.
+
+I know you've said before that you feel like you're never anyone's first priority. That you've been left waiting, wondering where you stand. I want you to know, with all my heart, that you are my first priority. Always have been, even when I wasn't ready to admit it.
+
+Back on Valentine's Day, when you told me how you felt, I wasn't ready. I was still dealing with my own stuff, broken and scared, and instead of being honest with you, I pushed you away. I'm really sorry for that. You didn't deserve to be treated like that.
+
+But through it all, you waited. You cared. You stuck around even when I didn't deserve it. And that's when I realized what real love looks like — patient, kind, and steady.
+
+I'm healed now. I'm ready now.
+
+Ready to be the guy who stands by you no matter what. The one who makes you laugh when life gets tough, listens when you need to talk, and loves you with no conditions.
+
+I don't want you to wait anymore. I don't want to hide how I feel or be scared.
+
+So here I am, asking with all my heart —
+
+Will you be mine?
+Not just today or tomorrow — but forever.
+
+I love you, [Her Name]. More than I can ever say, but I hope this letter is a start.`;
+
+    function startTyping() {
+      const typedTextElement = document.getElementById('typedText');
+      const proposalButton = document.getElementById('proposalButton');
+      let i = 0;
+      const speed = 20;
+      
+      function typeWriter() {
+        if (i < letterText.length) {
+          typedTextElement.innerHTML = letterText.substring(0, i+1) + '<span class="typed-cursor">|</span>';
+          i++;
+          
+          const delay = speed + (Math.random() * 30);
+          const currentChar = letterText.charAt(i);
+          
+          if (currentChar === '.' || currentChar === '!' || currentChar === '?') {
+            setTimeout(typeWriter, speed * 5);
+          } else if (currentChar === ',' || currentChar === ';') {
+            setTimeout(typeWriter, speed * 3);
+          } else {
+            setTimeout(typeWriter, delay);
+          }
+        } else {
+          typedTextElement.innerHTML = letterText;
+          proposalButton.style.display = 'block';
+        }
+      }
+      
+      typeWriter();
+    }
+    
+    function createHearts() {
+      const heartsContainer = document.getElementById('heartsContainer');
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+      heart.style.opacity = Math.random() * 0.5 + 0.3;
+      heartsContainer.appendChild(heart);
+      
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+    
+    window.onload = () => {
+      startTyping();
+      setInterval(createHearts, 300);
+    };
+  </script>
+</body>
+</html>
