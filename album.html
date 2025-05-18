@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>3D Album with Roses & Music</title>
+  <title>3D Album - Mobile Friendly</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <style>
@@ -15,15 +15,15 @@
 
     body {
       background: #000;
-      overflow: hidden;
       color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
     }
 
     h1 {
       text-align: center;
-      margin: 20px;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      padding: 1rem;
+      font-size: 1.8rem;
     }
 
     .carousel-container {
@@ -31,7 +31,6 @@
       width: 100%;
       height: 400px;
       position: relative;
-      margin-top: 60px;
     }
 
     .carousel {
@@ -42,7 +41,7 @@
       left: 50%;
       transform-style: preserve-3d;
       transform: translate(-50%, -50%);
-      transition: transform 1s;
+      transition: transform 1s ease;
     }
 
     .carousel img {
@@ -53,33 +52,48 @@
       top: 50%;
       margin-left: -125px;
       margin-top: -175px;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-      transition: transform 0.5s ease;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
       object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .nav-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      transform: translateY(-50%);
+      z-index: 5;
+    }
+
+    .nav-buttons button {
+      padding: 10px 20px;
+      background: #ff69b4;
+      border: none;
+      color: white;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
     }
 
     .music-btn {
       position: fixed;
       bottom: 30px;
       right: 30px;
+      background: #222;
+      border: 2px solid #ff69b4;
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: #222;
-      border: 2px solid #ff69b4;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       z-index: 10;
       box-shadow: 0 0 10px #ff69b4;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    .music-btn:hover {
-      transform: scale(1.1);
-      background: #ff69b4;
     }
 
     .music-btn i {
@@ -96,7 +110,6 @@
       animation: fall linear infinite;
       opacity: 0.8;
       pointer-events: none;
-      z-index: 0;
     }
 
     @keyframes fall {
@@ -110,60 +123,38 @@
       }
     }
 
-    .nav-buttons {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      z-index: 5;
-      transform: translateY(-50%);
-    }
-
-    .nav-buttons button {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 2px solid #ff69b4;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .nav-buttons button:hover {
-      background-color: #ff69b4;
-    }
-
-    /* Mobile Responsive Styles */
+    /* Mobile Styles */
     @media (max-width: 768px) {
-      .carousel img {
-        width: 150px;
-        height: 200px;
-        margin-left: -75px;
-        margin-top: -100px;
+      h1 {
+        font-size: 1.3rem;
       }
 
       .carousel-container {
-        height: 300px;
+        height: 280px;
       }
 
-      .nav-buttons button {
-        padding: 8px 15px;
-        font-size: 14px;
+      .carousel img {
+        width: 120px;
+        height: 180px;
+        margin-left: -60px;
+        margin-top: -90px;
       }
 
       .carousel {
-        animation: rotateYAuto 15s linear infinite;
+        animation: auto-rotate 20s linear infinite;
       }
-    }
 
-    @keyframes rotateYAuto {
-      0% {
-        transform: translate(-50%, -50%) rotateY(0deg);
+      @keyframes auto-rotate {
+        0% {
+          transform: translate(-50%, -50%) rotateY(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotateY(360deg);
+        }
       }
-      100% {
-        transform: translate(-50%, -50%) rotateY(360deg);
+
+      .nav-buttons {
+        display: none;
       }
     }
   </style>
@@ -175,20 +166,20 @@
   <div class="carousel-container">
     <div id="carousel" class="carousel"></div>
     <div class="nav-buttons">
-      <button onclick="rotateLeft()">⟵ Left</button>
-      <button onclick="rotateRight()">Right ⟶</button>
+      <button onclick="rotateLeft()">⟵</button>
+      <button onclick="rotateRight()">⟶</button>
     </div>
   </div>
 
-  <!-- Music Toggle Button -->
+  <!-- Music Button -->
   <div class="music-btn" onclick="toggleMusic()">
     <i id="music-icon" class="bi bi-music-note-beamed"></i>
   </div>
 
-  <!-- Background Music -->
+  <!-- Music -->
   <audio id="bg-music" loop>
     <source src="music/Pretty Little Baby - (Raag (mp3cut.net).mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+    Your browser does not support audio.
   </audio>
 
   <script>
@@ -201,14 +192,13 @@
     ];
 
     const carousel = document.getElementById('carousel');
-    const radius = 400;
     const imgCount = images.length;
+    const radius = 400;
     let angleOffset = 0;
 
     images.forEach((src, i) => {
       const img = document.createElement('img');
       img.src = src;
-      img.dataset.index = i;
       carousel.appendChild(img);
     });
 
@@ -220,8 +210,6 @@
       });
     }
 
-    updateCarousel();
-
     function rotateLeft() {
       angleOffset -= 360 / imgCount;
       updateCarousel();
@@ -232,18 +220,9 @@
       updateCarousel();
     }
 
-    // Detect mobile device
-    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+    updateCarousel();
 
-    if (!isMobile) {
-      document.addEventListener("mousemove", (e) => {
-        const rotateX = (e.clientY / window.innerHeight - 0.5) * 20;
-        const rotateY = (e.clientX / window.innerWidth - 0.5) * -60;
-        carousel.style.transform = `translate(-50%, -50%) rotateX(${rotateX}deg) rotateY(${rotateY + angleOffset}deg)`;
-      });
-    }
-
-    // Music Control
+    // Music Toggle
     const music = document.getElementById("bg-music");
     const icon = document.getElementById("music-icon");
     let isPlaying = false;
@@ -251,22 +230,30 @@
     function toggleMusic() {
       if (isPlaying) {
         music.pause();
-        icon.classList.remove("bi-pause-circle");
-        icon.classList.add("bi-music-note-beamed");
+        icon.classList.replace("bi-pause-circle", "bi-music-note-beamed");
       } else {
         music.play();
-        icon.classList.remove("bi-music-note-beamed");
-        icon.classList.add("bi-pause-circle");
+        icon.classList.replace("bi-music-note-beamed", "bi-pause-circle");
       }
       isPlaying = !isPlaying;
     }
 
-    // Falling Roses
+    // Disable 3D rotation on mobile (cursor move)
+    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+    if (!isMobile && window.innerWidth > 768) {
+      document.addEventListener("mousemove", (e) => {
+        const rotateX = (e.clientY / window.innerHeight - 0.5) * 15;
+        const rotateY = (e.clientX / window.innerWidth - 0.5) * -60;
+        carousel.style.transform = `translate(-50%, -50%) rotateX(${rotateX}deg) rotateY(${rotateY + angleOffset}deg)`;
+      });
+    }
+
+    // Falling rose petals
     function createRose() {
-      const rose = document.createElement('div');
-      rose.classList.add('rose');
-      rose.style.left = Math.random() * window.innerWidth + 'px';
-      rose.style.animationDuration = (4 + Math.random() * 4) + 's';
+      const rose = document.createElement("div");
+      rose.classList.add("rose");
+      rose.style.left = Math.random() * window.innerWidth + "px";
+      rose.style.animationDuration = (4 + Math.random() * 4) + "s";
       document.body.appendChild(rose);
       setTimeout(() => rose.remove(), 8000);
     }
